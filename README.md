@@ -1,7 +1,9 @@
 # hotelManageSystem
 BUPT软件工程小组作业——波普特酒店空调管理系统
 
-该项目的源仓库在https://gitee.com/TBro136/hotelManageSystem，此github仓库为搬运
+该项目的源仓库在https://gitee.com/TBro136/hotelManageSystem
+
+此github仓库为搬运
 
 # 酒店空调管理系统
 
