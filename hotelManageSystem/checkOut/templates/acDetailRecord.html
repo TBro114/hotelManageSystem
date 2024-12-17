@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUPT - 客户信息登记</title>
+    <link rel="stylesheet" href="/static/css/checkOutstyles.css">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <div class="logo">BUPT</div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/checkIn/customerInfor" class="no-style-link">  <!-- 添加 a 标签进行跳转 -->
+                            <img class="icon" src="/static/images/提前入住.png"> 入住
+                        </a>
+                    </li>
+                    <li class="active">
+                        <img class="icon" src="/static/images/结账.png"> 结账
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+
+            <div class="tabs">
+                <button class="tab"><a href="/checkOut/charge">收费</a></button>
+                <button class="tab active">空调详单</button>
+            </div>
+
+            <div class="large-box">
+                <!-- 动态生成小矩形 -->
+                {% if page_obj %}
+                    {% for record in page_obj %}
+                    <div class="small-box">
+                        <p>记录: {{ forloop.counter0|add:page_obj.start_index }}</p>
+                        <label>请求时间: 第 {{ record.request_time }} 分钟</label>
+                        <label>服务房间: {{ record.room.id }}</label>
+                        <label>空调设备: {{ record.airCondition.id }}</label>
+                        <label>开始时间: 第 {{ record.start_time }} 分钟</label>
+                        <label>结束时间: 第 {{ record.end_time }} 分钟</label>
+                        <label>当前风速: 
+                            {% if record.current_speed == 1 %}
+                                低
+                            {% elif record.current_speed == 2 %}
+                                中
+                            {% elif record.current_speed == 3 %}
+                                高
+                            {% else %}
+                                未知
+                            {% endif %}
+                        </label>
+                        <label>本次费用: {{ record.service_price }} 元</label>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>没有空调服务记录。</p>
+                {% endif %}
+            </div>
+
+            <!-- 分页按钮 -->
+            <div class="pagination-container">
+                <div class="pagination">
+                    <!-- 上一页按钮 -->
+                    {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}&room_id={{ room_id }}&per_page={{ page_obj.previous_page_number }}" 
+                       class="prev-page">
+                        &lt;
+                    </a>
+                    {% else %}
+                    <a href="?page={{ page_obj.number }}&per_page={{ per_page }}" 
+                       class="prev-page disabled">
+                        &lt;
+                    </a>
+                    {% endif %}
+                    
+                    <!-- 当前页码显示 -->
+                    <span>第 {{ page_obj.number }} 页，共 {{ page_obj.paginator.num_pages }} 页</span>
+
+                    <!-- 下一页按钮 -->
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&room_id={{ room_id }}&per_page={{ per_page }}" 
+                       class="next-page">
+                        &gt;
+                    </a>
+                    {% else %}
+                    <a href="?page={{ page_obj.number }}&per_page={{ per_page }}" 
+                       class="next-page disabled">
+                        &gt;
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- 生成详单按钮 -->
+            <button id="generateReport" class="generate-report-btn">导出详单</button>
+
+            <!-- 结账按钮 -->
+            <button id="check_out" class="check_out">结账</button>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById("generateReport").addEventListener("click", function() {
+            const records = [];
+            {% for record in air_service_logs %}
+                records.push({
+                    "服务房间": "{{ record.room.id|default:'' }}",
+                    "空调设备": "{{ record.airCondition.id|default:'' }}",
+                    "开始时间": "{{ record.start_time|default:'' }}",
+                    "结束时间": "{{ record.end_time|default:'' }}",
+                    "当前风速": getSpeedText("{{ record.current_speed|default:0 }}"),
+                    "本次费用": "{{ record.service_price|default:'0' }} 元"
+                });
+            {% endfor %}
+
+            if (records.length > 0) {
+                const ws = XLSX.utils.json_to_sheet(records);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "空调服务记录");
+
+                XLSX.writeFile(wb, "空调服务详单.xlsx");
+            } else {
+                alert("没有可生成的记录！");
+            }
+        });
+
+        // 辅助函数：根据风速编号返回文本
+        function getSpeedText(speed) {
+            if (speed === "1") return "低";
+            if (speed === "2") return "中";
+            if (speed === "3") return "高";
+            return "未知";
+        }
+
+        document.getElementById("check_out").addEventListener("click", function() {
+            const roomId = "{{ room_id }}"; // 直接使用传递的 room_id
+
+            if (confirm("确认要结账吗？")) {
+                // 发送DELETE请求
+                fetch(`/checkOut/acDetailRecord?page={{ page_obj.number }}&room_id={{room_id}}&per_page={{ per_page }}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("记录已删除！");
+                        location.reload(); // 删除成功后刷新页面
+                    } else {
+                        alert("删除失败：" + (data.message || "未知错误"));
+                    }
+                })
+                .catch(error => {
+                    console.error("删除请求失败：", error);
+                    alert("删除失败，请稍后再试！");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

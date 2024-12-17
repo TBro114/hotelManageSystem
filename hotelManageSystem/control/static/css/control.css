@@ -1,0 +1,393 @@
+body {
+    margin: 0;
+    height: 100vh;
+    z-index: -1;
+}
+
+button {
+    cursor: pointer;
+}
+
+#title {
+    width: 100%;
+    height: 10%;
+    background-color: #4081ff;
+    position: relative;
+}
+
+.empty {
+    position: absolute;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    color: #4aeeed;
+}
+
+#title a {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    height: 80%;
+    width: 3%;
+    z-index: 15;
+}
+
+#back {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    height: 80%;
+}
+
+#text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    background-color: #F5F5F5;
+}
+
+.wind {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    width: 22%;
+    height: 50%;
+    border-radius: 2%;
+    background-color: white;
+}
+
+.mode {
+    position: absolute;
+    left: 32%;
+    top: 5%;
+    width: 22%;
+    height: 50%;
+    border-radius: 2%;
+    background-color: white;
+}
+
+.cost {
+    position: absolute;
+    left: 5%;
+    bottom: 7%;
+    width: 49%;
+    height: 30%;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.temperature {
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    width: 25%;
+    height: 75%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.switch {
+    position: absolute;
+    right: 10%;
+    bottom: 7%;
+    width: 4.5%;
+    height: 10%;
+}
+
+.base {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: rgba(7, 118, 223, 1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.temperature button,
+.wind button {
+    border: none;
+    background-color: #f4f4f4;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.temperature button:hover,
+.wind button:hover {
+    background-color: #aee614;
+}
+
+.temperature button:active,
+.wind button:active {
+    background-color: #09ea36;
+}
+
+.speed-indicator {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 70%;
+}
+
+.indicator {
+    position: absolute;
+    width: 10%;
+    border-radius: 25px;
+    display: inline-block;
+    bottom: 30%;
+    z-index: 10;
+}
+
+#indicator1 {
+    left: 20%;
+    height: 35%;
+
+}
+
+#indicator2 {
+    left: 45%;
+    height: 50%;
+}
+
+#indicator3 {
+    right: 20%;
+    height: 65%;
+}
+
+#speed-level {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decrease-btn {
+    position: absolute;
+    left: 25%;
+    height: 10%;
+    width: 15%;
+    bottom: 5%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-size: 40px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wlogo {
+    position: absolute;
+    left: 40%;
+    height: 10%;
+    width: 20%;
+    bottom: 5%;
+    background-color: #f4f4f4;
+    background-image: url("../images/风速.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-size: 40%;
+}
+
+.increase-btn {
+    position: absolute;
+    height: 10%;
+    width: 15%;
+    right: 25%;
+    bottom: 5%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 40px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode-demo {
+    position: absolute;
+    width: 35%;
+    height: 35%;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#sun {
+    left: 10%;
+    top: 10%;
+    background-image: url("../images/太阳.png");
+    transform: scale(1);
+}
+
+#cold {
+    right: 10%;
+    top: 10%;
+    background-image: url("../images/雪花.png");
+}
+
+#dry {
+    left: 10%;
+    bottom: 10%;
+    background-image: url("../images/除湿.png");
+    transform: scale(0.7);
+}
+
+#wind {
+    right: 10%;
+    bottom: 10%;
+    background-image: url("../images/送风.png");
+    transform: scale(0.7);
+}
+
+.t {
+    position: absolute;
+    top: 10%;
+    font-size: 45px;
+}
+
+.n {
+    position: absolute;
+    bottom: 10%;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 45px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cur.t {
+    left: 20%;
+}
+
+.tot.t {
+    right: 20%;
+}
+
+.cur.n {
+    left: 20.5%;
+}
+
+.tot.n {
+    right: 20.5%;
+}
+
+.ring {
+    position: absolute;
+    left: 10%;
+    top: 7%;
+    width: 80%;
+    height: 64%;
+    border-radius: 50%;
+    border: 50px solid #e3fefd;
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 50px 0px rgba(143, 209, 238, 0.5);
+}
+
+.set {
+    position: absolute;
+    width: 100%;
+    top: 24%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+.now {
+    position: absolute;
+    width: 100%;
+    top: 46%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+.tdecrease-btn {
+    position: absolute;
+    left: 25%;
+    height: 10%;
+    width: 15%;
+    bottom: 10%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-size: 50px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tlogo {
+    position: absolute;
+    left: 40%;
+    height: 10%;
+    width: 20%;
+    bottom: 10%;
+    background-color: #f4f4f4;
+    background-image: url("../images/设定温度.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.tincrease-btn {
+    position: absolute;
+    height: 10%;
+    width: 15%;
+    right: 25%;
+    bottom: 10%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 50px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.turn {
+    position: absolute;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-image: url("../images/开.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: #4aeeed;
+    background-size: 80%;
+    transform: scale(0.8);
+    transform-origin: center;
+}

@@ -1,0 +1,485 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    /* 可选，用于去除按钮周围的外边距 */
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* 去除Firefox的默认样式 */
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    z-index: -1;
+}
+
+button {
+    cursor: pointer;
+}
+
+#title {
+    width: 100%;
+    height: 10%;
+    background-color: #4081ff;
+    position: relative;
+}
+
+#title a {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    height: 80%;
+    width: 3%;
+    z-index: 15;
+}
+
+#back {
+    position: absolute;
+    top: 10%;
+    left: 2%;
+    height: 80%;
+}
+
+#text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    background-color: #F5F5F5;
+}
+
+.room {
+    position: absolute;
+    width: 70%;
+    height: 80%;
+    top: 10%;
+    left: 5%;
+}
+
+.base {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: rgba(7, 118, 223, 1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button.tem:hover {
+    background-color: #aee614;
+}
+
+button.tem:active {
+    background-color: #09ea36;
+}
+
+.room-t {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+}
+
+.room-b {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 50%;
+}
+
+.r {
+    position: absolute;
+    top: 10%;
+    width: 30%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 5px solid black;
+}
+
+#room1 {
+    left: 0%;
+}
+
+#room2 {
+    left: 35%;
+}
+
+#room3 {
+    left: 70%;
+}
+
+.l1 {
+    position: absolute;
+    border-bottom: 2px solid;
+    box-sizing: border-box;
+    width: 100%;
+    height: 28%;
+
+}
+
+.l2 {
+    position: absolute;
+    border-bottom: 2px solid;
+    box-sizing: border-box;
+    top: 28%;
+    width: 100%;
+    height: 28%;
+}
+
+.l3 {
+    position: absolute;
+    border-right: 2px solid;
+    border-left: 2px solid;
+    box-sizing: border-box;
+    top: 56%;
+    left: 33%;
+    width: 34%;
+    height: 44%;
+}
+
+.room-id {
+    position: absolute;
+    top: 7%;
+    left: 2%;
+    font-size: 30px;
+}
+
+.room-turn {
+    position: absolute;
+    top: 0.5%;
+    right: 4%;
+    border-radius: 10px;
+    width: 19%;
+    height: 28%;
+    border: none;
+    background-image: url("../images/开.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: #4aeeed;
+    background-size: 80%;
+    transform: scale(0.8);
+    transform-origin: center;
+}
+
+.cur-c {
+    position: absolute;
+    top: 37%;
+    left: 4%;
+    font-size: 26px;
+}
+
+.tot-c {
+    position: absolute;
+    top: 37%;
+    right: 4%;
+    font-size: 26px;
+}
+
+.set-t {
+    position: absolute;
+    top: 65%;
+    left: 2%;
+    font-size: 26px;
+}
+
+.cur-t {
+    position: absolute;
+    top: 80%;
+    left: 2%;
+    font-size: 26px;
+}
+
+#speed-level{
+    position: absolute;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    color: #4aeeed;
+}
+
+.w {
+    position: absolute;
+    bottom: 5%;
+    width: 5%;
+    background-color: #d6d6d6;
+    border-radius: 15px;
+}
+.w-1 {
+    left: 38%;
+    height: 18%;
+}
+
+.w-2 {
+    left: 47.5%;
+    height: 26%;
+}
+
+.w-3 {
+    left: 57%;
+    height: 34%;
+}
+
+.mode {
+    position: absolute;
+    width: 24%;
+    height: 42%;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    right: 4.5%;
+    bottom: 1%;
+    background-image: url("../images/雪花.png");
+}
+
+
+
+.set {
+    position: absolute;
+    background-color: rgba(225, 255, 164, 0.941);
+    right: 0%;
+    width: 20%;
+    height: 100%;
+    box-sizing: border-box;
+    border-left: 2px solid;
+}
+
+.t {
+    position: absolute;
+    top: 3%;
+    left: 10%;
+    font-size: 40px;
+}
+
+.turn {
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    border-radius: 10px;
+    width: 22%;
+    height: 10%;
+    border: none;
+    background-image: url("../images/开.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: #4aeeed;
+    background-size: 80%;
+    transform: scale(0.8);
+    transform-origin: center;
+}
+
+.label1 {
+    position: absolute;
+    left: 12%;
+    top: 13%;
+    font-size: 25px;
+}
+
+.label2 {
+    position: absolute;
+    left: 12%;
+    top: 28%;
+    font-size: 25px;
+}
+
+.label3 {
+    position: absolute;
+    left: 12%;
+    top: 43%;
+    font-size: 25px;
+}
+
+.label4 {
+    position: absolute;
+    left: 12%;
+    top: 58%;
+    font-size: 25px;
+}
+
+.Mtdec-btn {
+    position: absolute;
+    left: 15%;
+    height: 8%;
+    width: 18%;
+    top: 18%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #f4f4f4;
+    font-size: 70px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Mtemp {
+    position: absolute;
+    font-size: 30px;
+    left: 33%;
+    height: 8%;
+    width: 34%;
+    top: 18%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    box-sizing: border-box;
+}
+
+.Mtinc-btn {
+    position: absolute;
+    height: 8%;
+    width: 18%;
+    right: 15%;
+    top: 18%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 70px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    background-color: #f4f4f4;
+    align-items: center;
+    justify-content: center;
+}
+
+.mtdec-btn {
+    position: absolute;
+    left: 15%;
+    height: 8%;
+    width: 18%;
+    top: 33%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: #f4f4f4;
+    font-size: 70px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mtemp {
+    position: absolute;
+    font-size: 30px;
+    left: 33%;
+    height: 8%;
+    width: 34%;
+    top: 33%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    box-sizing: border-box;
+}
+
+.mtinc-btn {
+    position: absolute;
+    height: 8%;
+    width: 18%;
+    right: 15%;
+    top: 33%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 70px;
+    color: #78d3f8;
+    text-align: center;
+    display: flex;
+    background-color: #f4f4f4;
+    align-items: center;
+    justify-content: center;
+}
+
+#cost {
+    position: absolute;
+    box-sizing: border-box;
+    top: 48%;
+    left: 15%;
+    width: 70%;
+    height: 8%;
+    border-radius: 15px;
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mode {
+    position: absolute;
+    box-sizing: border-box;
+    top: 63%;
+    left: 15%;
+    width: 70%;
+    height: 30%;
+    background-color: white;
+    border: 2px solid;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.mode-demo {
+    position: absolute;
+    width: 35%;
+    height: 35%;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#sun {
+    left: 10%;
+    top: 10%;
+    background-image: url("../images/太阳.png");
+    transform: scale(1);
+}
+
+#cold {
+    right: 10%;
+    top: 10%;
+    background-image: url("../images/雪花.png");
+}
+
+#dry {
+    left: 10%;
+    bottom: 10%;
+    background-image: url("../images/除湿.png");
+    transform: scale(0.7);
+}
+
+#wind {
+    right: 10%;
+    bottom: 10%;
+    background-image: url("../images/送风.png");
+    transform: scale(0.7);
+}

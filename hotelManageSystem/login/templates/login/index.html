@@ -1,0 +1,11 @@
+
+{% block content %}
+  <h2>欢迎，{{ username }}！</h2>
+  <p>您的身份是：{{ identity }}</p>
+  
+  <!-- 登出按钮 -->
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">登出</button>
+  </form>
+{% endblock %}

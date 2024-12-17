@@ -1,0 +1,267 @@
+/* 样式全局设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #808080; /* 灰色背景 */
+    color: #333;
+}
+
+.no-style-link {
+    text-decoration: none;  /* 去掉下划线 */
+    color: inherit;         /* 保持文字颜色与父元素一致 */
+}
+
+/* 容器布局 */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 为圆角矩形容器所在的区域应用 flex 布局 */
+.rounded-box-container {
+    display: flex;
+    flex-wrap: wrap;  /* 允许换行 */
+    justify-content: space-between;  /* 在一行中均匀分配空间 */
+    gap: 20px;  /* 设置子元素之间的间隔 */
+    margin-top: 20px;  /* 给整个容器添加一些顶部间距 */
+}
+
+/* 圆角矩形的样式 */
+.rounded-box {
+    width: 240px; /* 宽度 */
+    height: 160px; /* 高度 */
+    padding: 10px;
+    background-color: #7AA7FA; /* 背景色 */
+    border-radius: 12px; /* 圆角半径 */
+
+    position: relative; /* 使得子元素的定位相对于这个容器 */
+    margin-top: 20px;
+    margin-left: 40px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* 使内边距包括在宽高计算中 */
+    outline: none; /* 防止默认的焦点轮廓样式 */
+    cursor: pointer;
+}
+
+/* 空闲中状态 */
+.rounded-box.free {
+    background-color: #7AA7FA;  /* 空闲时的背景颜色 */
+    border: 2px solid #ffffff;  /* 绿色边框 */
+}
+
+/* 已预定状态 */
+.rounded-box.booked {
+    background-color: #fff2cd;  /* 预定时的背景颜色 */
+    border: 2px solid #fbc02d;  /* 黄色边框 */
+}
+
+/* 悬浮效果：增加缩放 */
+.rounded-box:hover {
+    background-color: #8CB7FF;
+    border-color: #008CBA;
+    box-shadow: 0 0 10px rgba(0, 140, 186, 0.6);
+    transform: scale(1.05); /* 放大 5% */
+}
+
+/* 禁止已预定房间的悬浮效果 */
+.rounded-box.booked:hover {
+    background-color: #fff2cd;  /* 保持原背景色 */
+    border-color: #fbc02d;  /* 保持原边框颜色 */
+    box-shadow: none;  /* 去掉阴影 */
+    
+    transform: none;  /* 去掉放大效果 */
+}
+
+/* 修改已预定房间的文字颜色 */
+.rounded-box.booked span {
+    color: #fbc02d;  /* 设置已预定房间文字的颜色 */
+}
+
+/* 选中状态的样式 */
+.rounded-box.selected {
+    background-color: #173bef;
+    border-color: #008CBA;
+    box-shadow: 0 0 10px rgba(0, 140, 186, 0.6);
+    transform: scale(1.05); /* 放大 5% */
+}
+
+
+/* 四个角内容的定位 */
+.rounded-box span {
+    position: absolute;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.top-left {
+    top: 28px;
+    left: 23px;
+}
+
+.top-right {
+    top: 28px;
+    right: 23px;
+    text-align: right; /* 右对齐 */
+}
+
+.bottom-left {
+    bottom: 28px;
+    left: 23px;
+}
+
+.bottom-right {
+    bottom: 28px;
+    right: 23px;
+    text-align: right; /* 右对齐 */
+}
+/* 左侧导航栏样式 */
+.sidebar {
+    width: 220px;
+    background-color: #4e9ff1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+}
+
+@font-face {
+    font-family: 'Monoton'; /* 自定义字体名称 */
+    src: url('../font/Monoton-Regular.ttf') format('truetype'); /* 指定字体路径 */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.sidebar .logo {
+    font-family: 'Monoton', cursive; /* 使用自定义字体 */
+    font-size: 40px; /* 字体大小 */
+    color: #ffffff; /* 字体颜色 */
+    text-shadow: 3px 3px 5px rgba(0, 150, 255, 0.7); /* 添加阴影效果 */
+    letter-spacing: 3px; /* 字母间距 */
+}
+
+.sidebar .icon {
+    width: 50px; 
+    height: 50px; 
+    margin-right: 10px; /* 图片与文字的间距 */
+    vertical-align: middle; /* 图片与文字垂直对齐 */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    padding: 50px 50px;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.sidebar nav ul li.active,
+.sidebar nav ul li:hover {
+    background-color: #3d8ce0;
+}
+
+.sidebar nav ul li .icon {
+    margin-right: 10    px;
+}
+
+/* 主内容区域样式 */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-content a {
+    color:#4e9ff1;
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.main-content a:hover {
+    color: #f3281d; /* 悬停时改变背景色 */
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.header .search-bar {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #f1f1f1;
+    margin-bottom: 10px;
+}
+
+.tabs .tab {
+    padding: 1% 8%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.tabs .tab.active {
+    color: #4e9ff1;
+    border-bottom: 3px solid #4e9ff1;
+}
+
+/* 表单样式 */
+.form {
+    max-width: 600px;
+    margin: 0 0 0 400px ;
+    margin-top: 100px;
+}
+
+.form-group {
+    margin-bottom: 15%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    padding: 20px 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+}
+
+.submit-btn {
+    display: block;
+    width: 580px;
+    padding: 10px;
+    background-color: #4e9ff1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #3d8ce0;
+}

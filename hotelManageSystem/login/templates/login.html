@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bupt酒店系统登录</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+    <div class="table">
+        <img src="/static/images/logo-b.png" class="logo">
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            <div class="form-group" id="f1">
+                <label for="username"></label>
+                <input type="text" id="username" name="username" placeholder="用户名" required>
+            </div>
+            <div class="form-group" id="f2">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="密码" required>
+            </div>
+            <div class="form-group" id="f4">
+                <button type="submit">登录</button>
+            </div>
+        </form>
+        <a href="{% url 'register' %}" id="register">注册</a></p>
+        <a id="forget" href="#">忘记密码</a>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+
+</html>

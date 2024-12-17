@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中央空调管理</title>
+    <link rel="stylesheet" href="../static/css/supervise.css">
+</head>
+
+<body>
+    <div id="title">
+        <a href="#"><img src="../static/images/返回.png" id="back"></a>
+        <div id="text">空调监管设置界面</div>
+    </div>
+    <div id="content">
+        <div class="room">
+            <div class="base">
+                <div class="room-t">
+                    <div class="base">
+                        <div class="r s1" id="room1">
+                            <div class="base">
+                                <div class="room-id">房间号：{{airList.0.room_id}}</div>
+                                <div class="room-turn"></div>
+                                <div class="cur-c">当前：{{airList.0.one_time_price}}￥</div>
+                                <div class="tot-c">累计：{{airList.0.total_price}}￥</div>
+                                <div class="set-t">目标：{{airList.0.target_temperature}}℃</div>
+                                <div class="cur-t">当前：{{airList.0.current_temperature}}℃</div>
+                                <div id="speed-level">{{airList.0.speed}}</div>
+                                <div class="w w-1 ww"></div>
+                                <div class="w w-2 ww"></div>
+                                <div class="w w-3 ww"></div>
+                                
+                                <div class="mode"></div>
+                                <div class="l1"></div>
+                                <div class="l2"></div>
+                                <div class="l3"></div>
+                            </div>
+                        </div>
+                        <div class="r s2" id="room2">
+                            <div class="base">
+                                <div class="room-id">房间号：{{ airList.1.room_id }}</div>
+                                <div class="room-turn"></div>
+                                <div class="cur-c">当前：{{ airList.1.one_time_price }}￥</div>
+                                <div class="tot-c">累计：{{ airList.1.total_price}}￥</div>
+                                <div class="set-t">目标：{{airList.1.target_temperature}}℃</div>
+                                <div class="cur-t">当前：{{airList.1.current_temperature}}℃</div>
+                                <div id="speed-level">{{airList.1.speed}}</div>
+                                <div class="w w-1"></div>
+                                <div class="w w-2"></div>
+                                <div class="w w-3"></div>
+                                <div class="mode"></div>
+                                <div class="l1"></div>
+                                <div class="l2"></div>
+                                <div class="l3"></div>
+                            </div>
+                        </div>
+                        <div class="r s3" id="room3">
+                            <div class="base">
+                                <div class="room-id">房间号：{{ airList.2.room_id }}</div>
+                                <div class="room-turn"></div>
+                                <div class="cur-c">当前：{{airList.2.one_time_price}}￥</div>
+                                <div class="tot-c">累计：{{airList.2.total_price}}￥</div>
+                                <div class="set-t">目标：{{airList.2.target_temperature}}℃</div>
+                                <div class="cur-t">当前：{{airList.2.current_temperature}}℃</div>
+                                <div id="speed-level">{{airList.2.speed}}</div>
+                                <div class="w w-1"></div>
+                                <div class="w w-2"></div>
+                                <div class="w w-3"></div>
+                                <div class="mode"></div>
+                                <div class="l1"></div>
+                                <div class="l2"></div>
+                                <div class="l3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-b">
+                    <div class="base">
+                        <div class="r s4" id="room1">
+                            <div class="base">
+                                <div class="room-id">房间号：{{airList.3.room_id}}</div>
+                                <div class="room-turn"></div>
+                                <div class="cur-c">当前：{{airList.3.one_time_price}}￥</div>
+                                <div class="tot-c">累计：{{airList.3.total_price}}￥</div>
+                                <div class="set-t">目标：{{airList.3.target_temperature}}℃</div>
+                                <div class="cur-t">当前：{{airList.3.current_temperature}}℃</div>
+                                <div class="w w-1"></div>
+                                <div id="speed-level">{{airList.3.speed}}</div>
+                                <div class="w w-2"></div>
+                                <div class="w w-3"></div>
+                                <div class="mode"></div>
+                                <div class="l1"></div>
+                                <div class="l2"></div>
+                                <div class="l3"></div>
+                            </div>
+                        </div>
+                        <div class="r s5" id="room2">
+                            <div class="base">
+                                <div class="room-id">房间号：{{airList.4.room_id}}</div>
+                                <div class="room-turn"></div>
+                                <div class="cur-c">当前：{{airList.4.one_time_price}}￥</div>
+                                <div class="tot-c">累计：{{airList.4.total_price}}￥</div>
+                                <div class="set-t">目标：{{airList.4.target_temperature}}℃</div>
+                                <div class="cur-t">当前：{{airList.4.current_temperature}}℃</div>
+                                <div class="w w-1"></div>
+                                <div id="speed-level">{{airList.4.speed}}</div>
+                                <div class="w w-2"></div>
+                                <div class="w w-3"></div>
+                                <div class="mode"></div>
+                                <div class="l1"></div>
+                                <div class="l2"></div>
+                                <div class="l3"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="set">
+            <div class="base">
+                <div class="t">中央空调</div>
+                <button class="turn"></button>
+                <div class="label1">最高温度（℃）</div>
+                <div class="label2">最低温度（℃）</div>
+                <div class="label3">计费费率（元/度）</div>
+                <div class="label4">工作模式</div>
+                <button class="Mtdec-btn tem">-</button>
+                <div class="Mtemp tem">{{max_temp}}</div>
+                <button class="Mtinc-btn tem">+</button>
+                <button class="mtdec-btn tem">-</button>
+                <div class="mtemp tem">{{min_temp}}</div>
+                <button class="mtinc-btn tem">+</button>
+                <input type="number" value="{{ centralaircondition.price_rate }}" id="cost">
+                <div id="mode">
+                    <div class="base">
+                        <button class="mode-demo" id="sun" data-mode="sun"></button>
+                        <button class="mode-demo" id="cold" data-mode="cold"></button>
+                        <button class="mode-demo" id="dry" data-mode="dry"></button>
+                        <button class="mode-demo" id="wind" data-mode="wind"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/script1.js"></script>
+    
+</body>
+
+</html>

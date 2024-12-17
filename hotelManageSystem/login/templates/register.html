@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bupt酒店系统注册</title>
+    <link rel="stylesheet" href="/static/css/register.css">
+</head>
+
+<body>
+    <div class="table">
+        <img src="/static/images/logo-b.png" class="logo">
+
+        <!-- 注册表单 -->
+        <form method="post" class="login-form">
+            {% csrf_token %}
+
+            <div class="form-group" id="f1">
+                <input type="text" id="username" name="username" placeholder="用户名" required>
+            </div>
+
+            <div class="form-group" id="f2">
+                <input type="password" id="password" name="password" placeholder="密码" required>
+            </div>
+
+            <!-- 确认密码字段 -->
+            <div class="form-group" id="f3">
+                <input type="password" id="password2" name="password2" placeholder="确认密码" required>
+            </div>
+
+            <!-- 秘钥输入字段 -->
+            <div class="form-group" id="f4">
+                <label for="secret_key"></label>
+                <input type="password" id="secret_key" name="secret_key" placeholder="秘钥">
+            </div>
+
+            <div class="form-group" id="f5">
+                <div class="role-option">
+                    <input type="radio" id="ac_manager" name="role" value="ac_manager">
+                    <label for="ac_manager">&nbsp;&nbsp;空调管理员</label>
+                </div>
+                <div class="role-option">
+                    <input type="radio" id="front_desk" name="role" value="front_desk">
+                    <label for="front-_esk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前台</label>
+                </div>
+                <div class="role-option">
+                    <input type="radio" id="hotel_manager" name="role" value="hotel_manager">
+                    <label for="hotel_manager">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经理</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="f6">
+                <button type="submit">注册</button>
+            </div>
+        </form>
+
+        <!-- 提示消息 -->
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- 已有账户提示 -->
+        <a href="{% url 'login' %}" id="login">已有账号？去登录</a>
+</body>
+
+</html>

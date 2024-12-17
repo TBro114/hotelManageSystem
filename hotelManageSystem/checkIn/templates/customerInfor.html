@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUPT - 客户信息登记</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <div class="logo">BUPT</div>
+            <nav>
+                <ul>
+                    <li class="active">
+                        <img class="icon" src="/static/images/提前入住.png"> 入住
+                    </li>
+                    <li class="clickable">
+                        <a href="/checkOut/charge" class="no-style-link">  <!-- 添加 a 标签进行跳转 -->
+                            <img class="icon" src="/static/images/结账.png"> 结账
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+
+            <div class="tabs">
+                <button class="tab active">顾客信息登记</button>
+                <button class="tab"><a href="/checkIn/roomInquiry">客房查询</a></button>
+            </div>
+
+            <form class="form" method="POST" action="/checkIn/customerInfor">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" name="name" id="name" placeholder="请输入姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="id">身份证号</label>
+                    <input type="text" name="id_number" id="id" placeholder="请输入身份证号" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkin">入住时间</label>
+                    <input type="datetime-local" name="checkin_time" id="checkin" placeholder="请输入入住时间" required>
+                </div>
+                <button type="submit" class="submit-btn">提交</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

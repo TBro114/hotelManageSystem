@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUPT - 客户信息登记</title>
+    <link rel="stylesheet" href="/static/css/checkOutstyles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <div class="logo">BUPT</div>
+            <nav>
+                <ul>
+                    <li class="clickable">
+                        <a href="/checkIn/customerInfor" class="no-style-link">  <!-- 添加 a 标签进行跳转 -->
+                            <img class="icon" src="/static/images/提前入住.png"> 入住
+                        </a>
+                    </li>
+                    <li class="active">
+                        <img class="icon" src="/static/images/结账.png"> 结账
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+
+            <div class="tabs">
+                <button class="tab active">收费</button>
+                <button class="tab"><a href="/checkOut/acDetailRecord">空调详单</a></button>
+            </div>
+
+            <form class="form" method="POST" action="/checkOut/charge">
+                {% csrf_token %}
+                <label for="roomId">房间号</label>
+                <input type="text" name="roomId" id="roomId" placeholder="请输入房间号" required>
+                <button type="submit" class="submit-btn">查询</button>
+            </form>
+
+             <!-- 结账信息展示区域 -->
+             <div class="checkout-info">
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% else %}
+                    <div data-room-id="{{ room_id }}">房间号：   {{ room_id }}</div>
+                    <div data-days-stayed="{{ days_stayed }}">住宿天数：   {{ days_stayed }} 天</div>
+                    <div data-room-rate="{{ room_rate }}">客房单价：   {{ room_rate }} 元/天</div>
+                    <div data-accommodation-cost="{{ accommodation_cost }}">住宿费用：   {{ accommodation_cost }} 元</div>
+                    <div data-air-conditioning-cost="{{ air_conditioning_cost }}">空调费用：   {{ air_conditioning_cost }} 元</div>
+                    <div data-total-cost="{{ total_cost }}">总费用：   {{ total_cost }} 元</div>
+                {% endif %}
+                <form action="/checkOut/acDetailRecord" method="GET">
+                    <input type="hidden" name="room_id" value="{{ room_id }}">
+                    <button type="submit" class="submit-btn bottom-right" 
+                            {% if not room_id %}disabled{% endif %}>
+                        查询空调详单
+                    </button>
+                </form>
+                <button id="exportBillBtn" class="export-btn" 
+                    {% if not room_id %}disabled{% endif %}>
+                        导出空调账单
+                </button>
+            </div>
+
+            
+        </main>
+    </div>
+
+<script>
+    document.getElementById('exportBillBtn').addEventListener('click', function() {
+    const roomId = document.querySelector('[data-room-id]').dataset.roomId;
+    const daysStayed = document.querySelector('[data-days-stayed]').dataset.daysStayed;
+    const roomRate = document.querySelector('[data-room-rate]').dataset.roomRate;
+    const accommodationCost = document.querySelector('[data-accommodation-cost]').dataset.accommodationCost;
+    const airConditioningCost = document.querySelector('[data-air-conditioning-cost]').dataset.airConditioningCost;
+    const totalCost = document.querySelector('[data-total-cost]').dataset.totalCost;
+
+    const data = {
+        room_id: roomId,
+        days_stayed: daysStayed,
+        room_rate: roomRate,
+        accommodation_cost: accommodationCost,
+        air_conditioning_cost: airConditioningCost,
+        total_cost: totalCost
+    };
+
+    fetch('charge/billDownload', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'X-CSRFToken': csrftoken // 确保包含CSRF令牌
+        },
+        body: JSON.stringify(data) // 将数据转换为JSON字符串
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "bills.xlsx"; // 设置下载的文件名
+        document.body.appendChild(a);
+        a.click(); // 触发点击事件，开始下载
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url); // 释放URL对象
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+
+</body>
+</html>

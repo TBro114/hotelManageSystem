@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUPT - 客户信息登记</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <div class="logo">BUPT</div>
+            <nav>
+                <ul>
+                    <li class="active">
+                        <img class="icon" src="/static/images/提前入住.png"> 入住
+                    </li>
+                    <li class="clickable">
+                        <a href="/checkOut/charge" class="no-style-link">  <!-- 添加 a 标签进行跳转 -->
+                            <img class="icon" src="/static/images/结账.png"> 结账
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+
+            <div class="tabs">
+                <button class="tab"><a href="/checkIn/customerInfor">顾客信息登记</a></button>
+                <button class="tab active">客房查询</button>
+            </div>
+
+            <div class="rounded-box-container">
+                {% if room %}
+                    {% for room in room %}
+                    <div class="rounded-box 
+                        {% if room.room_status == 0 %}free{% endif %}
+                        {% if room.room_status == 1 %}booked{% endif %}
+                        {% if room.room_status != 0 and room.room_status != 1 %}other{% endif %}
+                        " tabindex="0"
+                        data-room-id="{{ room.id }}" >
+                            <span class="top-left">{{ room.id }}</span> <!-- 房间号 -->
+                            <span class="top-right">
+                                {% if room.airConditioner %}
+                                    {{ room.airConditioner.airCondition_mode }}
+                                {% else %}
+                                    暂无空调
+                                {% endif %}
+                            </span>
+                            <span class="bottom-left">
+                                {% if room.room_status == 0 %}
+                                    空闲中
+                                {% elif room.room_status == 1 %}
+                                    已预定
+                                {% else %}
+                                    其他
+                                {% endif %}
+                            </span>
+                            <span class="bottom-right">￥{{ room.room_price }}</span> <!-- 房间价格 -->
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>没有可用的房间。</p>
+                {% endif %}
+            </div>
+
+            <form class="form" id="room-selection-form" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="selected_room_id" id="selected-room-id">
+                <button type="submit" class="submit-btn">确定</button>
+            </form>
+        </main>
+    </div>
+    <script>
+        // 等页面加载完成后执行
+        document.addEventListener("DOMContentLoaded", function() {
+            const boxes = document.querySelectorAll('.rounded-box');  // 获取所有的圆角矩形
+            let selectedRoomId = null;  // 保存选中的房间 ID
+
+            boxes.forEach(box => {
+                box.addEventListener('click', function() {
+
+                    // 如果是已预定的房间，跳过点击事件
+                    if (this.classList.contains('booked')) {
+                        return;  // 不做任何操作，禁止选中已预定房间
+                    }
+
+
+                    // 先移除所有其他元素的选中状态
+                    boxes.forEach(item => item.classList.remove('selected'));
+    
+                    // 为当前点击的元素添加选中状态
+                    this.classList.add('selected');
+
+                    // 更新选中房间的 ID
+                    selectedRoomId = this.dataset.roomId;  // 保存房间 ID
+                    console.log('选中的房间 ID:', selectedRoomId);
+                });
+            });
+
+                        // 监听表单提交
+                        const form = document.getElementById('room-selection-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();  // 防止默认提交行为
+        
+                if (selectedRoomId) {
+                    // 将选中的房间 ID 设置到隐藏字段中
+                    document.getElementById('selected-room-id').value = selectedRoomId;
+
+                    // 提交表单
+                    form.submit();
+                } else {
+                    alert('请先选择一个房间！');  // 如果没有选中房间，提示用户
+                }
+            });
+        });
+    </script>
+</body>
+</html>

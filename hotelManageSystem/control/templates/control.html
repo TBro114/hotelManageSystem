@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空调控制面板</title>
+    <link rel="stylesheet" href="../static/css/control.css">
+</head>
+
+<body>
+    <div id="title">
+        <a href="{% url 'customerlogout' %}"><img src="../static/images/返回.png" id="back"></a>
+        <div id="text">空调控制面板</div>
+    </div>
+    <div id="content">
+        <div class="wind c">
+            <div class="base">
+                <div class="speed-indicator">
+                    <div class="indicator" id="indicator1"></div>
+                    <div class="indicator" id="indicator2"></div>
+                    <div class="indicator" id="indicator3"></div>
+                </div>
+                <div id="speed-level">{{ air_record.speed }}</div>
+                <button class="decrease-btn">-</button>
+                <div id="wlogo"></div>
+                <button class="increase-btn">+</button>
+                <script src="../static/js/script.js"></script>
+            </div>
+        </div>
+        <div class="mode c">
+            <div class="base">
+                <div class="empty">{{ air_record.airCondition_mode }}</div>
+                <button class="mode-demo" id="sun" data-mode="sun"></button>
+                <button class="mode-demo" id="cold" data-mode="cold"></button>
+                <button class="mode-demo" id="dry" data-mode="dry"></button>
+                <button class="mode-demo" id="wind" data-mode="wind"></button>
+            </div>
+        </div>
+        <div class="cost c">
+            <div class="base">
+                <div class="cur t">当前费用</div>
+                <div class="cur n">{{airbill.one_time_price}}</div>
+                <div class="tot t">累积费用</div>
+                <div class="tot n">{{ air_record.total_price }}</div>
+            </div>
+        </div>
+        <div class="temperature c">
+            <div class="base">
+                <div class="ring"></div>
+                <div class="set">目标：{{ air_record.target_temperature }}℃</div>
+                <div class="now">当前：{{ air_record.current_temperature }}℃</div>
+                <button class="tdecrease-btn">-</button>
+                <div id="tlogo"></div>
+                <button class="tincrease-btn">+</button>
+            </div>
+        </div>
+        <div class="switch">
+            <div class="base">
+                <button class="turn"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
